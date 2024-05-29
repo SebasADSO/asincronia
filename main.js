@@ -151,9 +151,9 @@
 //   let arreglo = []
 // se crea un bucle for in
 //   for (let i in user.users) {
-  // se crea una condicional que filtre los aprendizes
+// se crea una condicional que filtre los aprendizes
 //     if (user.users[i].aprendiz == true) {
-  // se crea una peticion a la api de github
+// se crea una peticion a la api de github
 //       let respuestaGithub = await fetch(
 //         `https://api.github.com/users/${user.users[i].user}/repos`
 //       );
@@ -197,51 +197,55 @@
 
 /// INICIO DEL EJERCICIO #4
 
-// (async () => {
-//   // se crea una peticion para leer el archivo json
-//   let response = await fetch("user.json");
-//   // se recibe la respuesta del json y se le asigna una varaiable para usarla
-//   let user = await response.json();
-// se crea un arreglo vacio
-//   let arreglo = [];
-// se crea un bucle for in
-//   for (let i in user.users) {
-  // se crea una condicional que filtre los aprendizes
-//     if (user.users[i].aprendiz == true) {
-  // se crea una peticion a la api de github
-//       let respuestaGithub = await fetch(
-//         `https://api.github.com/users/${user.users[i].user}/repos`
-//       );
-// se recibe la  respuesta y se le asigna a una variable
-//       let usuariogithub = await respuestaGithub.json();
-// se usa el metodo foreach que recorra los elementos y filtre en base la funcion
-//       usuariogithub.forEach((element) => {
-  // se inicia un contador
-//         let cantrepo = 0;
-// se crea un bucle for in
-//         for (let i in usuariogithub) {
-  // se crea una condicional que filtre repositorios publicos de privados
-//           if (element.visibility === "public") {
-  // se incrementa el contador de repositorios publicos
-//             let count = cantrepo++;
-// cuando el contador llege a 5 pasara en true esta condicional
-//             if (count > 5) arreglo.push(element);
-// se crea una variable que almacene el nombre del repositorio
-//             let validar = element.name;
-// se crea la condicional que agregara el elemento al array siempre que sea true
-//             if (validar.includes("Javascript") && validar.length > 5) {
-  // se agrega el elemento al array
-//               arreglo.push(element);
-//             }
-//           }
-//         }
-//       });
-//     }
-//   }
-// se imprime los elementos del array por orden con el metodo sort
-//   console.log(...arreglo.sort());
-// se ejecuta la funcion flecha
-// })();
+(async () => {
+  // se crea una peticion para leer el archivo json
+  let response = await fetch("user.json");
+  // se recibe la respuesta del json y se le asigna una varaiable para usarla
+  let user = await response.json();
+  // se crea un arreglo vacio
+  let arreglo = [];
+  // se crea un bucle for in
+  for (let i in user.users) {
+    // se crea una condicional que filtre los aprendizes
+    if (user.users[i].aprendiz == true) {
+      // se crea una peticion a la api de github
+      let respuestaGithub = await fetch(
+        `https://api.github.com/users/${user.users[i].user}/repos`
+      );
+      // se recibe la  respuesta y se le asigna a una variable
+      let usuariogithub = await respuestaGithub.json();
+      // se usa el metodo foreach que recorra los elementos y filtre en base la funcion
+      usuariogithub.forEach((element) => {
+        // se inicia un contador
+        let cantrepo = 0;
+        // se crea un bucle for in
+        for (let i in usuariogithub) {
+          // se crea una condicional que filtre repositorios publicos de privados
+          if (element.visibility === "public") {
+            // se incrementa el contador de repositorios publicos
+            let count = cantrepo++;
+            // cuando el contador llege a 5 pasara en true esta condicional
+            if (count > 5) {
+              // se crea una variable que almacene el nombre del repositorio
+              let validar = element.name;
+              // se crea la condicional que agregara el elemento al array siempre que sea true
+              if (validar.includes("Javascript") && validar.length > 5) {
+                // se agrega el elemento al array
+                arreglo.push(element);
+              }
+            }
+          }
+          else {
+
+          }
+        }
+      });
+    }
+  }
+  // se imprime los elementos del array por orden con el metodo sort
+  console.log(...arreglo.sort());
+  // se ejecuta la funcion flecha
+})();
 
 /// FINALIZA EL EJERCICIO #4
 
@@ -274,41 +278,41 @@
 //  }
 //})();
 
-// se crea una funcios async para llamar el json
-async function llamar() {
-  // se crea la peticion al archivo json
-  let response = await fetch("user.json");
-  // se recibe respuesta del archivo
-  let user = await response.json();
-}
-// se llama la funcion
-llamar()
-const fs = require('fs');
+// // se crea una funcios async para llamar el json
+// async function llamar() {
+//   // se crea la peticion al archivo json
+//   let response = await fetch("user.json");
+//   // se recibe respuesta del archivo
+//   let user = await response.json();
+// }
+// // se llama la funcion
+// llamar()
+// const fs = require('fs');
 
-// se crea un proxy
-let finish = new Proxy(llamar(), handler)
-// se crea una crea un handler proxy que hara la validaciones
-const proxyHandler = {
-  set: function(target, property, value) {
-    // se crea un bucle que recorra los usuarios
-    for (let users of user.users) {
-      // se crea una condicional que filtre los datos
-      if (user.users.aprendiz == true && user.users.name.split(' ').length > 2) {
-        if (user.users.user.includes('ADSO')) {
-          // se convierte a mayusculas los nombres que pasaron la condicional
-          user.users.name = user.users.name.toUpperCase();
-        }
-      }
-    }
-    // Permitir la operación de escritura
-    return Reflect.set(target, property, value);
-  }
-};
+// // se crea un proxy
+// let finish = new Proxy(llamar(), handler)
+// // se crea una crea un handler proxy que hara la validaciones
+// const proxyHandler = {
+//   set: function(target, property, value) {
+//     // se crea un bucle que recorra los usuarios
+//     for (let users of user.users) {
+//       // se crea una condicional que filtre los datos
+//       if (user.users.aprendiz == true && user.users.name.split(' ').length > 2) {
+//         if (user.users.user.includes('ADSO')) {
+//           // se convierte a mayusculas los nombres que pasaron la condicional
+//           user.users.name = user.users.name.toUpperCase();
+//         }
+//       }
+//     }
+//     // Permitir la operación de escritura
+//     return Reflect.set(target, property, value);
+//   }
+// };
 
-// Aplicar el proxy a cada usuario
-for (let users of user.users) {
-  user.users.name = new Proxy(user.users.name, proxyHandler);
-}
-// se escribe en el json
-const updatedData = JSON.stringify(user.users, null, 2);
-fs.writeFileSync('user.json', updatedData);
+// // Aplicar el proxy a cada usuario
+// for (let users of user.users) {
+//   user.users.name = new Proxy(user.users.name, proxyHandler);
+// }
+// // se escribe en el json
+// const updatedData = JSON.stringify(user.users, null, 2);
+// fs.writeFileSync('user.json', updatedData);
