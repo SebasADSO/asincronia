@@ -11,7 +11,7 @@
 /// INICIA EL EJERCICIO #1
 
 // // Esta fraccion de codigo no se usa
-// const filtrar = x => x.name === "Evaluacion";
+// // const filtrar = x => x.name === "Evaluacion";
 
 // // se crea una funcion de flecha, se inicia el async
 // (async () => {
@@ -25,15 +25,15 @@
 //   );
 //   // se recibe la respuesta de la api y se le asigna una varaiable para usarla
 //   let usuariogithub = await respuestaGithub.json();
-
+//   console.log(usuariogithub.length)
 //   // se usa el metodo forEach para recorrer todos los elementos del repositorio hasta finalizar el recorrido (no haber mas elementos que recorrer)
-//   usuariogithub.forEach((element) => {
-//     // se crea una condicional que filtra todos los elementos que en el recorrido no cumplan la condicion, en este caso name seria el nombre del repositorio que sebe ser estrictamente igual a asincronia
-//     if (element.name === "asincronia") {
-//       // se imprime los elementos encontrados
-//       console.log(element);
-//     }
-//   })
+//   // usuariogithub.forEach((element) => {
+//   //   // se crea una condicional que filtra todos los elementos que en el recorrido no cumplan la condicion, en este caso name seria el nombre del repositorio que sebe ser estrictamente igual a asincronia
+//   //   if (element.name === "asincronia") {
+//   //     // se imprime los elementos encontrados
+//   //     console.log(element);
+//   //   }
+//   // })
 //   // Los corchetes cerrados permiten ejecutar el codigo de la funcion de flecha
 // })();
 
@@ -147,19 +147,19 @@
 //   let response = await fetch("user.json");
 //   // se recibe la respuesta del json y se le asigna una varaiable para usarla
 //   let user = await response.json();
-// se crea un arreglo vacio
+// // se crea un arreglo vacio
 //   let arreglo = []
-// se crea un bucle for in
+// // se crea un bucle for in
 //   for (let i in user.users) {
-// se crea una condicional que filtre los aprendizes
+// // se crea una condicional que filtre los aprendizes
 //     if (user.users[i].aprendiz == true) {
-// se crea una peticion a la api de github
+// // se crea una peticion a la api de github
 //       let respuestaGithub = await fetch(
 //         `https://api.github.com/users/${user.users[i].user}/repos`
 //       );
-// se recibe la  respuesta y se le asigna a una variable
+// // se recibe la  respuesta y se le asigna a una variable
 //       let usuariogithub = await respuestaGithub.json();
-// se usa el metodo foreach que recorra los elementos y filtre en base la funcion
+// // se usa el metodo foreach que recorra los elementos y filtre en base la funcion
 //       usuariogithub.forEach((element) => {
 //         // se crea una condicional que ayudara filtrar los repositorios privados de los publicos
 //         if (element.visibility === "public") {
@@ -169,9 +169,9 @@
 //       });
 //     }
 //   }
-// se imprime el array una vez finalizado el bucle
+// // se imprime el array una vez finalizado el bucle
 //   console.log(...arreglo);
-// se ejecuta la funcio flecha
+// // se ejecuta la funcio flecha
 // })();
 
 /// FINALIZA EL EJERCICIO #3
@@ -197,55 +197,52 @@
 
 /// INICIO DEL EJERCICIO #4
 
-(async () => {
-  // se crea una peticion para leer el archivo json
-  let response = await fetch("user.json");
-  // se recibe la respuesta del json y se le asigna una varaiable para usarla
-  let user = await response.json();
-  // se crea un arreglo vacio
-  let arreglo = [];
-  // se crea un bucle for in
-  for (let i in user.users) {
-    // se crea una condicional que filtre los aprendizes
-    if (user.users[i].aprendiz == true) {
-      // se crea una peticion a la api de github
-      let respuestaGithub = await fetch(
-        `https://api.github.com/users/${user.users[i].user}/repos`
-      );
-      // se recibe la  respuesta y se le asigna a una variable
-      let usuariogithub = await respuestaGithub.json();
-      // se usa el metodo foreach que recorra los elementos y filtre en base la funcion
-      usuariogithub.forEach((element) => {
-        // se inicia un contador
-        let cantrepo = 0;
-        // se crea un bucle for in
-        for (let i in usuariogithub) {
-          // se crea una condicional que filtre repositorios publicos de privados
-          if (element.visibility === "public") {
-            // se incrementa el contador de repositorios publicos
-            let count = cantrepo++;
-            // cuando el contador llege a 5 pasara en true esta condicional
-            if (count > 5) {
-              // se crea una variable que almacene el nombre del repositorio
-              let validar = element.name;
-              // se crea la condicional que agregara el elemento al array siempre que sea true
-              if (validar.includes("Javascript") && validar.length > 5) {
-                // se agrega el elemento al array
-                arreglo.push(element);
-              }
-            }
-          }
-          else {
+// (async () => {
+//   // se crea una peticion para leer el archivo json
+//   let response = await fetch("user.json");
+//   // se recibe la respuesta del json y se le asigna una varaiable para usarla
+//   let user = await response.json();
+//   // se crea un arreglo vacio
+//   let arreglo = [];
+//   // se crea un bucle for in
+//   for (let i in user.users) {
+//     // se crea una condicional que filtre los aprendizes
+//     if (user.users[i].aprendiz == true) {
+//       // se crea una peticion a la api de github
+//       let respuestaGithub = await fetch(
+//         `https://api.github.com/users/${user.users[i].user}/repos`
+//       );
+//       // se recibe la  respuesta y se le asigna a una variable
+//       let usuariogithub = await respuestaGithub.json();
+//       // se usa el metodo foreach que recorra los elementos y filtre en base la funcion
+//       usuariogithub.forEach((element) => {
+//         // se crea un bucle for in
+//         for (let i in usuariogithub) {
+//           // se crea una condicional que filtre repositorios publicos de privados
+//           if (element.visibility === "public") {
+//             // cuando el contador llege a 5 pasara en true esta condicional
+//             if (usuariogithub.length < 5) {
+//               console.log(usuariogithub.length)
+//               // se crea una variable que almacene el nombre del repositorio
+//               let validar = element.name;
+//               // se crea la condicional que agregara el elemento al array siempre que sea true
+//               if (validar.includes("Javascript") && validar.length > 5) {
+//                 // se agrega el elemento al array
+//                 arreglo.push(element);
+//               }
+//             }
+//           }
+//           // else {
 
-          }
-        }
-      });
-    }
-  }
-  // se imprime los elementos del array por orden con el metodo sort
-  console.log(...arreglo.sort());
-  // se ejecuta la funcion flecha
-})();
+//           // }
+//         }
+//       });
+//     }
+//   }
+//   // se imprime los elementos del array por orden con el metodo sort
+//   console.log(...arreglo.sort());
+//   // se ejecuta la funcion flecha
+// })();
 
 /// FINALIZA EL EJERCICIO #4
 
